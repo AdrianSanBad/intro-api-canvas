@@ -1,26 +1,279 @@
+// Función para dibujar un cuadrado en un lienzo
 function drawCuadrado() {
-    const canvas = document.getElementById("draw_cuadrado");
-    if (canvas.getContext) {
-      const ctx = canvas.getContext("2d");
-      ctx.fillStyle = "rgb(50, 100, 50)";//de color verde
-      ctx.strokeStyle = "rgb (139,0,139)";//de color morado vivo
-      ctx.fillRect(25, 25, 100, 100);
-      ctx.clearRect(45, 45, 60, 60);
-      ctx.strokeRect(50, 50, 50, 50);
+  const canvas = document.getElementById("draw_cuadrado"); // Obtener el lienzo por su ID
+  if (canvas.getContext) { // Verificar si el contexto del lienzo es compatible
+    const ctx = canvas.getContext("2d"); // Obtener el contexto 2D del lienzo
+
+    // Establecer el color de relleno y contorno
+    ctx.fillStyle = "rgb(50, 100, 50)"; // Verde
+    ctx.strokeStyle = "rgb(139, 0, 139)"; // Morado
+    // Dibujar un rectángulo relleno
+    ctx.fillRect(25, 25, 100, 100);
+    // Limpiar un área dentro del rectángulo
+    ctx.clearRect(45, 45, 60, 60);
+    // Dibujar un rectángulo contorneado
+    ctx.strokeRect(50, 50, 50, 50);
+  }
+}
+
+// Función para dibujar un triángulo en un lienzo
+function drawTriangle() {
+  const canvas = document.getElementById("draw_triangulo"); // Obtener el lienzo por su ID
+  if (canvas.getContext) { // Verificar si el contexto del lienzo es compatible
+    const ctx = canvas.getContext("2d"); // Obtener el contexto 2D del lienzo
+
+    // Comenzar un nuevo trazado
+    ctx.beginPath();
+    // Mover el lápiz a la primera coordenada del triángulo
+    ctx.moveTo(50, 100);
+    // Dibujar líneas a las siguientes coordenadas para formar un triángulo
+    ctx.lineTo(75, 50);
+    ctx.lineTo(100, 100);
+    // Rellenar el triángulo
+    ctx.fill();
+  }
+}
+
+// Función para dibujar una cara sonriente en un lienzo
+function moverPluma() {
+  const canvas = document.getElementById("mover_pluma"); // Obtener el lienzo por su ID
+  if (canvas.getContext) { // Verificar si el contexto del lienzo es compatible
+    const ctx = canvas.getContext("2d"); // Obtener el contexto 2D del lienzo
+
+    // Comenzar un nuevo trazado para dibujar la cara sonriente
+    ctx.beginPath();
+    // Dibujar la cara sonriente utilizando una combinación de líneas y arcos
+    // Detalles de los ojos y la boca
+    ctx.arc(75, 75, 50, 0, Math.PI * 2, true);
+    ctx.moveTo(110, 75);
+    ctx.arc(75, 75, 35, 0, Math.PI, false);
+    ctx.moveTo(65, 65);
+    ctx.arc(60, 65, 5, 0, Math.PI * 2, true);
+    ctx.moveTo(95, 65);
+    ctx.arc(90, 65, 5, 0, Math.PI * 2, true);
+    // Dibujar el trazado
+    ctx.stroke();
+  }
+}
+
+// Función para dibujar triángulos y rectángulos en un lienzo
+function dibujarLineas() {
+  const canvas = document.getElementById("lineas"); // Obtener el lienzo por su ID
+  if (canvas.getContext) { // Verificar si el contexto del lienzo es compatible
+    const ctx = canvas.getContext("2d"); // Obtener el contexto 2D del lienzo
+
+    // Dibujar un triángulo relleno
+    ctx.beginPath();
+    ctx.moveTo(25, 25);
+    ctx.lineTo(105, 25);
+    ctx.lineTo(25, 105);
+    ctx.fill();
+
+    // Dibujar un triángulo contorneado
+    ctx.beginPath();
+    ctx.moveTo(125, 125);
+    ctx.lineTo(125, 45);
+    ctx.lineTo(45, 125);
+    ctx.closePath();
+    ctx.stroke();
+  }
+}
+
+// Función para dibujar arcos en un lienzo
+function dibujarArcos() {
+  const canvas = document.getElementById("arcos"); // Obtener el lienzo por su ID
+  if (canvas.getContext) { // Verificar si el contexto del lienzo es compatible
+    const ctx = canvas.getContext("2d"); // Obtener el contexto 2D del lienzo
+
+    // Iterar para dibujar múltiples arcos en el lienzo
+    for (let i = 0; i < 4; i++) {
+      for (let j = 0; j < 3; j++) {
+        // Calcular las coordenadas y ángulos para cada arco
+        const x = 25 + j * 50;
+        const y = 25 + i * 50;
+        const radius = 20;
+        const startAngle = 0;
+        const endAngle = Math.PI + (Math.PI * j) / 2;
+        const counterclockwise = i % 2 !== 0;
+
+        // Dibujar el arco
+        ctx.beginPath();
+        ctx.arc(x, y, radius, startAngle, endAngle, counterclockwise);
+
+        // Rellenar o contornear dependiendo de la fila
+        if (i > 1) {
+          ctx.fill();
+        } else {
+          ctx.stroke();
+        }
+      }
     }
   }
-  function drawTriangle() {
-    const canvas = document.getElementById("draw_triangulo");
-    if (canvas.getContext) {
-      const ctx = canvas.getContext("2d");
-  
-      ctx.beginPath();
-      ctx.moveTo(50, 100);
-      ctx.lineTo(75,50 );
-      ctx.lineTo(100, 100);
-      ctx.fill();
-    }
+}
+
+// Función para dibujar curvas cuadráticas de Bézier en un lienzo
+function curvasCuadraticasBuzier() {
+  const canvas = document.getElementById("curvas_buzier_cuadraticas"); // Obtener el lienzo por su ID
+  if (canvas.getContext) { // Verificar si el contexto del lienzo es compatible
+    const ctx = canvas.getContext("2d"); // Obtener el contexto 2D del lienzo
+
+    // Ejemplo de curvas cuadráticas de Bézier
+    ctx.beginPath();
+    ctx.moveTo(75, 25);
+    ctx.quadraticCurveTo(25, 25, 25, 62.5);
+    ctx.quadraticCurveTo(25, 100, 50, 100);
+    ctx.quadraticCurveTo(50, 120, 30, 125);
+    ctx.quadraticCurveTo(60, 120, 65, 100);
+    ctx.quadraticCurveTo(125, 100, 125, 62.5);
+    ctx.quadraticCurveTo(125, 25, 75, 25);
+    ctx.stroke();
   }
-  
+}
+
+// Función para dibujar curvas cúbicas de Bézier en un lienzo
+function curvasCubicasBuzier() {
+  const canvas = document.getElementById("curvas_buzier_cubicas"); // Obtener el lienzo por su ID
+  if (canvas.getContext) { // Verificar si el contexto del lienzo es compatible
+    const ctx = canvas.getContext("2d"); // Obtener el contexto 2D del lienzo
+
+    // Ejemplo de curvas cúbicas de Bézier
+    ctx.beginPath();
+    ctx.moveTo(75, 40);
+    ctx.bezierCurveTo(75, 37, 70, 25, 50, 25);
+    ctx.bezierCurveTo(20, 25, 20, 62.5, 20, 62.5);
+    ctx.bezierCurveTo(20, 80, 40, 102, 75, 120);
+    ctx.bezierCurveTo(110, 102, 130, 80, 130, 62.5);
+    ctx.bezierCurveTo(130, 62.5, 130, 25, 100, 25);
+    ctx.bezierCurveTo(85, 25, 75, 37, 75, 40);
+    ctx.fill();
+  }
+}
+
+// Función para dibujar un rectángulo en un lienzo
+function dibujarRectangulo() {
+  const canvas = document.getElementById("rectangulo"); // Obtener el lienzo por su ID
+  if (canvas.getContext) { // Verificar si el contexto del lienzo es compatible
+    const ctx = canvas.getContext("2d"); // Obtener el contexto 2D del lienzo
+
+    // Comenzar un nuevo trazado y dibujar un rectángulo
+    ctx.beginPath();
+    ctx.rect(10, 20, 150, 100);
+    ctx.fill();
+  }
+}
+
+// Función para dibujar una combinación de formas en un lienzo
+function combinacion() {
+  const canvas = document.getElementById("combinado"); // Obtener el lienzo por su ID
+  if (canvas.getContext) { // Verificar si el contexto del lienzo es compatible
+    const ctx = canvas.getContext("2d"); // Obtener el contexto 2D del lienzo
+
+    // Dibujar múltiples formas combinadas en un solo lienzo
+    roundedRect(ctx, 12, 12, 150, 150, 15);
+    roundedRect(ctx, 19, 19, 150, 150, 9);
+    roundedRect(ctx, 53, 53, 49, 33, 10);
+    roundedRect(ctx, 53, 119, 49, 16, 6);
+    roundedRect(ctx, 135, 53, 49, 33, 10);
+    roundedRect(ctx, 135, 119, 25, 49, 10);
+
+    // Dibujar una serie de círculos
+    ctx.beginPath();
+    ctx.arc(37, 37, 13, Math.PI / 7, -Math.PI / 7, false);
+    ctx.lineTo(31, 37);
+    ctx.fill();
+
+    for (let i = 0; i < 8; i++) {
+      ctx.fillRect(51 + i * 16, 35, 4, 4);
+    }
+
+    for (let i = 0; i < 6; i++) {
+      ctx.fillRect(115, 51 + i * 16, 4, 4);
+    }
+
+    for (let i = 0; i < 8; i++) {
+      ctx.fillRect(51 + i * 16, 99, 4, 4);
+    }
+
+    // Dibujar una forma compleja con curvas de Bézier
+    ctx.beginPath();
+    ctx.moveTo(83, 116);
+    ctx.lineTo(83, 102);
+    ctx.bezierCurveTo(83, 94, 89, 88, 97, 88);
+    ctx.bezierCurveTo(105, 88, 111, 94, 111, 102);
+    ctx.lineTo(111, 116);
+    ctx.lineTo(106.333, 111.333);
+    ctx.lineTo(101.666, 116);
+    ctx.lineTo(97, 111.333);
+    ctx.lineTo(92.333, 116);
+    ctx.lineTo(87.666, 111.333);
+    ctx.lineTo(83, 116);
+    ctx.fill();
+
+    // Dibujar los ojos de la forma
+    ctx.fillStyle = "white";
+    ctx.beginPath();
+    ctx.moveTo(91, 96);
+    ctx.bezierCurveTo(88, 96, 87, 99, 87, 101);
+    ctx.bezierCurveTo(87, 103, 88, 106, 91, 106);
+    ctx.bezierCurveTo(94, 106, 95, 103, 95, 101);
+    ctx.bezierCurveTo(95, 99, 94, 96, 91, 96);
+    ctx.moveTo(103, 96);
+    ctx.bezierCurveTo(100, 96, 99, 99, 99, 101);
+    ctx.bezierCurveTo(99, 103, 100, 106, 103, 106);
+    ctx.bezierCurveTo(106, 106, 107, 103, 107, 101);
+    ctx.bezierCurveTo(107, 99, 106, 96, 103, 96);
+    ctx.fill();
+
+    // Dibujar los puntos de los ojos
+    ctx.fillStyle = "black";
+    ctx.beginPath();
+    ctx.arc(101, 102, 2, 0, Math.PI * 2, true);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(89, 102, 2, 0, Math.PI * 2, true);
+    ctx.fill();
+  }
+}
+
+// Función auxiliar para dibujar un rectángulo con esquinas redondeadas
+function roundedRect(ctx, x, y, width, height, radius) {
+  ctx.beginPath();
+  ctx.moveTo(x, y + radius);
+  ctx.arcTo(x, y + height, x + radius, y + height, radius);
+  ctx.arcTo(x + width, y + height, x + width, y + height - radius, radius);
+  ctx.arcTo(x + width, y, x + width - radius, y, radius);
+  ctx.arcTo(x, y, x, y + radius, radius);
+  ctx.stroke();
+}
+
+// Función para ejemplificar el uso de Path2D en un lienzo
+function path2dEjemplificada() {
+  const canvas = document.getElementById("ejemploPath2d"); // Obtener el lienzo por su ID
+  if (canvas.getContext) { // Verificar si el contexto del lienzo es compatible
+    const ctx = canvas.getContext("2d"); // Obtener el contexto 2D del lienzo
+
+    // Crear un nuevo Path2D para un rectángulo
+    const rectangle = new Path2D();
+    rectangle.rect(10, 10, 50, 50);
+
+    // Crear un nuevo Path2D para un círculo
+    const circle = new Path2D();
+    circle.arc(100, 35, 25, 0, 2 * Math.PI);
+
+    // Dibujar el rectángulo y el círculo en el lienzo
+    ctx.stroke(rectangle);
+    ctx.fill(circle);
+  }
+}
+// Llamar a las funciones para dibujar en los lienzos
 drawCuadrado();
 drawTriangle();
+moverPluma();
+dibujarLineas();
+dibujarArcos();
+curvasCuadraticasBuzier();
+curvasCubicasBuzier();
+dibujarRectangulo();
+combinacion();
+path2dEjemplificada();
